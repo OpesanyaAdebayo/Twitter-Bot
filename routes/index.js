@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 /* POST to home page. */
 router.post('/', function (req, res, next) {
   let formattedHashTags = formatInput(req.body.twitterHashTags);
-
+  req.session.formattedHashTags = formattedHashTags;
   google.checkToken().then((response) => {
     // console.log(response);
     if (response.credentials === undefined) {

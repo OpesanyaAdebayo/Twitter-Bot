@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const session = require('express-session');
 require('dotenv').config();
 
 
@@ -24,6 +25,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.use(session({
+  secret: 'ywgd99o3n-32371-ao',
+  resave: false, //don't save session if unmodified
+  saveUninitialized: false,// don't create session until something store
+  cookie: {path: '/', httpOnly: true, maxAge: null}
+}));
 
 app.use('/', index);
 app.use('/oauthCallback', oauthCallback);
