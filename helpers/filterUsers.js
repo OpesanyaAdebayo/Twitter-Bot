@@ -7,7 +7,7 @@ const filterUsers = (tweets) => {
 
     const uniqueUsers = _.uniqWith(users, _.isEqual); //make sure there are no repetitions
 
-    return _.flatten(uniqueUsers);
+    return uniqueUsers;
 };
 
 module.exports = filterUsers;
