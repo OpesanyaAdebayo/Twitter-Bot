@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 let google = require("../helpers/google");
 
-/* GET users listing. */
+
 router.get('/', function(req, res, next) {
   let oauth2Client  = google.getOAuthClient();
   let code = req.query.code;

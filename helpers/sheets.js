@@ -25,24 +25,4 @@ let writeToSheet = (userData) => {
     });
 };
 
-let clearSheet = () => {
-    google.checkToken().then((auth) => {
-        return new Promise((resolve, reject) => {
-            sheets.clearSheet({
-                auth: auth,
-                spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
-                range: 'names!A2:D50',
-            }, (err, response) => {
-                if (err) {
-                    reject(Error(err));
-                } else {
-                    resolve(auth);
-                }
-            });
-        });
-    });
-};
-
-module.exports = {
-    writeToSheet: writeToSheet
-};
+module.exports = writeToSheet;
