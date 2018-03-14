@@ -1,5 +1,35 @@
 ## Back-end Developer Test
 
+## Getting Started
+
+1. You need to have Node.js installed. You can download and install Node.js [here](http://nodejs.org/)
+
+2. Create a `.env` file in the root directory. The `.env` file will look something like the following:
+
+  ```none
+    TWITTER_CONSUMER_KEY = <Twitter Consumer Key>
+    TWITTER_CONSUMER_SECRET = <Twitter Consumer Secret>
+    TWITTER_ACCESS_TOKEN = <Twitter Access Token>
+    TWITTER_ACCESS_TOKEN_SECRET = <Twitter Access Token Secret>
+    GOOGLE_CLIENT_ID = <Google Client Id>
+    GOOGLE_CLIENT_SECRET = <Google Client Secret>
+    GOOGLE_REDIRECT_URL = <Google Redirect Url>
+    GOOGLE_SPREADSHEET_ID = <Google Spreadsheet Id>
+    MAX_COUNT = <Maximum number of tweets to fetch>
+  ```
+
+3. Install the dependencies you application need:
+
+  ```none
+  npm install
+  ```
+4. Start the application locally:
+
+  ```none
+  npm start
+  ```
+
+5. Point your browser to [http://localhost:3000](http://localhost:3000).
 ### Devcenter Backend Developer Test I
 
 The purpose of this test is not only to quickly gauge an applicant's abilities with writing codes, but also their approach to development.
@@ -10,7 +40,7 @@ Applicants may use whatever language they want to achieve the outcome.
 
 Build a bot that extracts the following from people’s Twitter bio (on public/open accounts), into a Google spreadsheet:
 
-* Twitter profile name 
+* Twitter profile name
 * Number of followers
 
 Target accounts using either of these criteria:
