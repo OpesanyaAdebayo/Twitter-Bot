@@ -28,11 +28,7 @@ router.get('/', function (req, res, next) {
 
     client.stream('statuses/filter', {track: searchQuery}, (stream) => {
         stream.on('data', function(tweets) {
-            let userData =[];
-            userData[0] = tweets.user.screen_name;
-            userData[1] = tweets.user.name;
-            userData[2] = tweets.user.followers_count;
-
+            let userData =[tweets.user.screen_name,tweets.user.name,tweets.user.followers_count];
             client.currentTweetStream = stream;
             sheets([userData]).catch((err) => {
                 console.log(err);
