@@ -38,16 +38,15 @@ const checkToken = () => {
 
 };
 
-
-const getToken = (code) => {
-    return new Promise((resolve, reject) => {
-        if (error) {
-            reject(Error(error));
-        }
-        oauth2Client.setCredentials(token);
-        resolve(token);
-    });
-};
+// const getToken = (code) => {
+//     return new Promise((resolve, reject) => {
+//         if (error) {
+//             reject(Error(error));
+//         }
+//         oauth2Client.setCredentials(token);
+//         resolve(token);
+//     });
+// };
 
 const saveToken = (token) => {
     return new Promise((resolve, reject) => {
