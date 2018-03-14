@@ -8,13 +8,14 @@ $("#hashTagsForm").submit(function (event) {
     else {
         $("#submitHashTags").attr('disabled', 'disabled');
         $.post("/", $("#hashTagsForm").serialize(), function(data) {
-            if(!data.message) {
-                window.location.href = '/success';
-                return;
+            if(data.message){
+                $("#message").html(data.message);
+                $("#message").append(`<br><br><button type="button" class="btn btn-outline-primary"><a class ="continue" href = '${data.url}'>Continue</a></button>`);
+                $("#authDiv").addClass("show");
             }
-            $("#message").html(data.message);
-            $("#message").append(`<br><br><button type="button" class="btn btn-outline-primary"><a class ="continue" href = '${data.url}'>Continue</a></button>`);
-            $("#authDiv").addClass("show");
+            if(data.action){
+                window.location.href = '/success';
+            }
         });
     }
     event.preventDefault();

@@ -8,8 +8,8 @@ let client = new Twitter({
 });
 
 const getTweets = (hashTags) => {
+    let searchQuery = hashTags.join(" OR ");
     return new Promise((resolve, reject) => {
-        let searchQuery = hashTags.join(" OR ");
         client.get('search/tweets', {
             q: searchQuery, count: process.env.MAX_COUNT
         }, function (error, tweets) {

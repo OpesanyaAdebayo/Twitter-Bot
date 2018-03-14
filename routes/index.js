@@ -1,8 +1,5 @@
 var express = require('express');
 var router = express.Router();
-let formatInput = require("../helpers/formatInput");
-let getTweets = require("../helpers/twitter");
-let filterUsers = require("../helpers/filterUsers");
 let google = require("../helpers/google");
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -13,8 +10,8 @@ router.get('/', function (req, res, next) {
 
 /* POST to home page. */
 router.post('/', function (req, res, next) {
-  let formattedHashTags = formatInput(req.body.twitterHashTags);
-  req.session.formattedHashTags = formattedHashTags;
+  let hashTags = req.body.twitterHashTags;
+  req.session.hashTags = hashTags;
   google.checkToken().then((response) => {
     // console.log(response);
     if (response.credentials === undefined) {
@@ -23,7 +20,7 @@ router.post('/', function (req, res, next) {
         url: response
       });
     } else {
-      res.redirect('/success');
+      res.json({action: "Redirect"});
     }
   });
 });

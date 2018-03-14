@@ -17,7 +17,6 @@ const getOAuthClient = () => {
     return oauth2Client;
 };
 
-// Load client secrets from a local file.
 const checkToken = () => {
     let oauth2Client = getOAuthClient();
     return new Promise((resolve, reject) => {
