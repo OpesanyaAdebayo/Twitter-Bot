@@ -3,6 +3,7 @@ var router = express.Router();
 let formatInput = require("../helpers/formatInput");
 let getTweets = require("../helpers/twitter");
 let filterUsers = require("../helpers/filterUsers");
+let google = require("../helpers/google");
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', {
@@ -14,6 +15,13 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   let formattedHashTags = formatInput(req.body.twitterHashTags);
   getTweets(formattedHashTags).then(tweets => filterUsers(tweets.statuses))
+  .then(() => {
+    let url = google.getAuthUrl();
+    res.json({
+      message: "To continue, please click the link below.",
+      url: url
+    });
+  })
   .catch((error) => console.log(error));
 });
 
