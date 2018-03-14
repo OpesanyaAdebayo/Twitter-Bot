@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.send("HELLO");
+    res.render('success', {
+        title: 'Twitter Bot'
+      });
 });
 
 module.exports = router;

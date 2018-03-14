@@ -14,15 +14,18 @@ router.get('/', function (req, res, next) {
 /* POST to home page. */
 router.post('/', function (req, res, next) {
   let formattedHashTags = formatInput(req.body.twitterHashTags);
-  getTweets(formattedHashTags).then(tweets => filterUsers(tweets.statuses))
-  .then(() => {
-    let url = google.getAuthUrl();
-    res.json({
-      message: "To continue, please click the link below.",
-      url: url
-    });
-  })
-  .catch((error) => console.log(error));
+
+  google.checkToken().then((response) => {
+    // console.log(response);
+    if (response.credentials === undefined) {
+      res.json({
+        message: "To continue, please click the link below.",
+        url: response
+      });
+    } else {
+      res.redirect('/success');
+    }
+  });
 });
 
 module.exports = router;

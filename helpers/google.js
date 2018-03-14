@@ -1,13 +1,12 @@
 let google = require('googleapis');
 let googleAuth = require('google-auth-library');
-let fs = require('fs');
-
-
+var fs = require('fs');
+let url;
 
 const TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE) + '/.credentials/';
 const TOKEN_PATH = TOKEN_DIR + 'sheets.googleapis.com-nodejs-quickstart.json';
 
-// Load client secrets from a local file.
+
 const getOAuthClient = () => {
     let clientId = process.env.GOOGLE_CLIENT_ID;
     let clientSecret = process.env.GOOGLE_CLIENT_SECRET;
@@ -18,15 +17,28 @@ const getOAuthClient = () => {
     return oauth2Client;
 };
 
-const getAuthUrl = () => {
+// Load client secrets from a local file.
+const checkToken = () => {
     let oauth2Client = getOAuthClient();
-    const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-    let url = oauth2Client.generateAuthUrl({
-        access_type: 'offline',
-        scope: SCOPES
+    return new Promise((resolve, reject) => {
+        fs.readFile(TOKEN_PATH, function (err, token) {
+            if (err) {
+                const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
+                let url = oauth2Client.generateAuthUrl({
+                    access_type: 'offline',
+                    scope: SCOPES
+                });
+                resolve(url);
+            } else {
+                oauth2Client.credentials = JSON.parse(token);
+                resolve(oauth2Client);
+            }
+        });
+
     });
-    return url;
+
 };
+
 
 const getToken = (code) => {
     return new Promise((resolve, reject) => {
@@ -46,20 +58,24 @@ const saveToken = (token) => {
                     reject(Error(err));
                 }
                 if (error.code == 'EEXIST') {
-                    resolve(fs.writeFile(TOKEN_PATH, JSON.stringify(token)));
-                    console.log("Success!");
+                    fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err, response) => {
+                        if (err) {
+                            reject(Error(err));
+                        }
+                        resolve(response);
+
+                    });
                 }
             }
-            resolve(fs.writeFile(TOKEN_PATH, JSON.stringify(token)), function(err, response) {
-                if (err.code != 'EEXIST') {
-                    reject(Error(err));
-                }
-                if (err.code == 'EEXIST') {
-                    resolve("Success");
-                    console.log("Success!");
-                }
-            });
+            else {
+                fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err, response) => {
+                    if (err) {
+                        reject(Error(err));
+                    }
+                    resolve(response);
 
+                });
+            }
         });
     });
 };
@@ -67,6 +83,6 @@ const saveToken = (token) => {
 
 module.exports = {
     getOAuthClient: getOAuthClient,
-    getAuthUrl: getAuthUrl,
-    saveToken: saveToken
+    saveToken: saveToken,
+    checkToken: checkToken
 };
