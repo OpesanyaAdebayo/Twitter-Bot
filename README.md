@@ -18,7 +18,7 @@
     MAX_COUNT = <Maximum number of tweets to fetch>
   ```
 
-3. Install the dependencies you application need:
+3. Install the dependencies your application needs:
 
   ```none
   npm install
