@@ -38,4 +38,4 @@ Target accounts based on hashtags used. The bot maintains a session and continou
 
 5. Point your browser to [http://localhost:3000](http://localhost:3000).
 
-![screen shot](https://user-images.githubusercontent.com/8668661/33088863-330b4250-ceef-11e7-9e9c-b4fd9ca299d8.gif)
+![screen shot](https://github.com/OpesanyaAdebayo/Twitter-Bot/blob/master/Twitter%20Bot%20Exercise.gif)
