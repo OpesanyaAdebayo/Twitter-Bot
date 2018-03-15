@@ -4,10 +4,8 @@ A bot that extracts the following from people’s Twitter bio (on public/open ac
 
 Twitter profile name
 Number of followers
-Target accounts using either of these criteria:
 
-Based on hashtags used.
-The bot maintains a session and continously listens to the predefined hashtag
+Target accounts based on hashtags used. The bot maintains a session and continously listens to the predefined hashtag
 
 ## Getting Started
 
